@@ -1,8 +1,11 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::env;
+use std::panic::panic_any;
 
 fn main() {
-    let file = File::open("non_existent_file.txt");
+    let args: Vec<String> = env::args().collect();
+    let file = File::open(&args[0]);
     let file = match file {
         Ok(file) => file,
         Err(error) => {
